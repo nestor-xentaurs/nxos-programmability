@@ -1,0 +1,7 @@
+---
+
+- name: Build templates
+  hosts: wan
+
+  tasks:
+    - template: src=templates/routers.j2 dest=configs/{{ inventory_hostname }}.cfg
