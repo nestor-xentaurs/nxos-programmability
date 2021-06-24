@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.9" simulationEngine="OPENSTACK" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.9/virl.xsd">
+    <extensions>
+        <entry key="management_network" type="String">flat</entry>
+    </extensions>
+    <node name="leaf-1" type="SIMPLE" subtype="NX-OSv" location="45,137" vmImage="NX-OSv-7.3 [b2d3b700-f8da-41c3-9107-ee92f4296188]" vmFlavor="NX-OSv">
+        <extensions>
+            <entry key="static_ip" type="String">198.18.1.102</entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">!Command: show running-config&#xD;
+!Time: Fri Apr  3 18:59:44 2015&#xD;
+&#xD;
+version 7.1(0)D1(1)&#xD;
+power redundancy-mode redundant&#xD;
+license grace-period&#xD;
+&#xD;
+hostname leaf-1&#xD;
+vdc leaf-1 id 1 &#xD;
+  allocate interface Ethernet2/1-48&#xD;
+  limit-resource vlan minimum 16 maximum 4094&#xD;
+  limit-resource vrf minimum 2 maximum 4096&#xD;
+  limit-resource port-channel minimum 0 maximum 768&#xD;
+  limit-resource u4route-mem minimum 96 maximum 96&#xD;
+  limit-resource u6route-mem minimum 24 maximum 24&#xD;
+  limit-resource m4route-mem minimum 58 maximum 58&#xD;
+  limit-resource m6route-mem minimum 8 maximum 8&#xD;
+&#xD;
+&#xD;
+role name guest&#xD;
+  rule 4 permit command show ip int brief&#xD;
+  rule 3 permit command show int brief&#xD;
+  rule 2 permit command show run *&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+&#xD;
+role name guest&#xD;
+  rule 2 permit read&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+role name ansible&#xD;
+  rule 10 permit read&#xD;
+  rule 9 permit command configure ; ip route *&#xD;
+  rule 8 permit command configure ; interface * ; ip address *&#xD;
+  rule 7 permit command configure ; interface * ; no switchport&#xD;
+  rule 6 permit command configure ; interface * ; no shut&#xD;
+  rule 5 permit command configure ; interface * ; switchport *&#xD;
+  rule 4 permit command configure ; vlan *&#xD;
+  rule 3 permit command configure ; feature *&#xD;
+  rule 2 permit command show ip route *&#xD;
+  rule 1 permit command show cdp neighbor&#xD;
+username admin password 5 $5$RntehrWP$2BrCWwELPuRooqK2ah0jbxcDyGBffZlj5A32rcuaRQC  role network-admin&#xD;
+username adminbackup password 5 !  role network-operator&#xD;
+username adminbackup passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username guest password 5 $5$cwsbeoEg$JHQ5plMQFVfnMWYY4KVTshLTEwbW8UPajat9IEBeOt2  role guest&#xD;
+username guest passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username ansible password 5 $5$TdyjK1mI$xJioprCKUPOb0Z2WeyvXIzFMHEW6FOMYOVYktq13xc.  role ansible&#xD;
+username ansible passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+no password strength-check&#xD;
+&#xD;
+ip domain-lookup&#xD;
+vlan dot1Q tag native&#xD;
+system jumbomtu 0&#xD;
+no logging event trunk-status enable&#xD;
+copp profile strict&#xD;
+&#xD;
+vrf context management&#xD;
+&#xD;
+interface Ethernet2/1&#xD;
+ no shutdown&#xD;
+&#xD;
+interface Ethernet2/2&#xD;
+ no shutdown&#xD;
+&#xD;
+interface mgmt0&#xD;
+  no cdp enable&#xD;
+  ip address 198.18.1.102&#xD;
+  vrf member management&#xD;
+&#xD;
+</entry>
+        </extensions>
+        <interface id="0" name="Ethernet2/1"/>
+        <interface id="1" name="Ethernet2/2"/>
+        <interface id="2" name="Ethernet2/3"/>
+        <interface id="3" name="Ethernet2/4"/>
+        <interface id="4" name="Ethernet2/5"/>
+    </node>
+    <node name="leaf-2" type="SIMPLE" subtype="NX-OSv" location="273,143" vmImage="NX-OSv-7.3 [b2d3b700-f8da-41c3-9107-ee92f4296188]" vmFlavor="NX-OSv">
+        <extensions>
+            <entry key="static_ip" type="String">198.18.1.103</entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">!Command: show running-config&#xD;
+!Time: Fri Apr  3 19:00:37 2015&#xD;
+&#xD;
+version 7.1(0)D1(1)&#xD;
+power redundancy-mode redundant&#xD;
+license grace-period&#xD;
+&#xD;
+hostname leaf-2&#xD;
+vdc leaf-2 id 1&#xD;
+  allocate interface Ethernet2/1-48&#xD;
+  limit-resource vlan minimum 16 maximum 4094&#xD;
+  limit-resource vrf minimum 2 maximum 4096&#xD;
+  limit-resource port-channel minimum 0 maximum 768&#xD;
+  limit-resource u4route-mem minimum 96 maximum 96&#xD;
+  limit-resource u6route-mem minimum 24 maximum 24&#xD;
+  limit-resource m4route-mem minimum 58 maximum 58&#xD;
+  limit-resource m6route-mem minimum 8 maximum 8&#xD;
+role name guest&#xD;
+  rule 4 permit command show ip int brief&#xD;
+  rule 3 permit command show int brief&#xD;
+  rule 2 permit command show run *&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+&#xD;
+role name guest&#xD;
+  rule 2 permit read&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+role name ansible&#xD;
+  rule 10 permit read&#xD;
+  rule 9 permit command configure ; ip route *&#xD;
+  rule 8 permit command configure ; interface * ; ip address *&#xD;
+  rule 7 permit command configure ; interface * ; no switchport&#xD;
+  rule 6 permit command configure ; interface * ; no shut&#xD;
+  rule 5 permit command configure ; interface * ; switchport *&#xD;
+  rule 4 permit command configure ; vlan *&#xD;
+  rule 3 permit command configure ; feature *&#xD;
+  rule 2 permit command show ip route *&#xD;
+  rule 1 permit command show cdp neighbor&#xD;
+username admin password 5 $5$RntehrWP$2BrCWwELPuRooqK2ah0jbxcDyGBffZlj5A32rcuaRQC  role network-admin&#xD;
+username adminbackup password 5 !  role network-operator&#xD;
+username adminbackup passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username guest password 5 $5$cwsbeoEg$JHQ5plMQFVfnMWYY4KVTshLTEwbW8UPajat9IEBeOt2  role guest&#xD;
+username guest passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username ansible password 5 $5$TdyjK1mI$xJioprCKUPOb0Z2WeyvXIzFMHEW6FOMYOVYktq13xc.  role ansible&#xD;
+username ansible passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+no password strength-check&#xD;
+&#xD;
+ip domain-lookup&#xD;
+vlan dot1Q tag native&#xD;
+no logging event trunk-status enable&#xD;
+copp profile strict&#xD;
+&#xD;
+&#xD;
+vlan 1&#xD;
+&#xD;
+vrf context management&#xD;
+&#xD;
+interface Ethernet2/1&#xD;
+no shutdown&#xD;
+&#xD;
+interface Ethernet2/2&#xD;
+no shutdown&#xD;
+&#xD;
+&#xD;
+interface mgmt0&#xD;
+ ip address 198.18.1.103&#xD;
+  no cdp enable&#xD;
+  vrf member management&#xD;
+&#xD;
+&#xD;
+line vty&#xD;
+</entry>
+        </extensions>
+        <interface id="0" name="Ethernet2/1"/>
+        <interface id="1" name="Ethernet2/2"/>
+        <interface id="2" name="Ethernet2/3"/>
+        <interface id="3" name="Ethernet2/4"/>
+        <interface id="4" name="Ethernet2/5"/>
+    </node>
+    <node name="spine-1" type="SIMPLE" subtype="NX-OSv" location="43,55" vmImage="NX-OSv-7.3 [b2d3b700-f8da-41c3-9107-ee92f4296188]" vmFlavor="NX-OSv" ipv4="192.168.0.1">
+        <extensions>
+            <entry key="static_ip" type="String">198.18.1.100</entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">! NX-OSv Config generated on 2016-01-05 17:11&#xD;
+! by autonetkit_0.15.3&#xD;
+!&#xD;
+version 6.2(1)&#xD;
+license grace-period&#xD;
+!&#xD;
+hostname spine-1&#xD;
+vdc spine-1 id 1&#xD;
+  allocate interface Ethernet2/1-48&#xD;
+  limit-resource vlan minimum 16 maximum 4094&#xD;
+  limit-resource vrf minimum 2 maximum 4096&#xD;
+  limit-resource port-channel minimum 0 maximum 768&#xD;
+  limit-resource u4route-mem minimum 96 maximum 96&#xD;
+  limit-resource u6route-mem minimum 24 maximum 24&#xD;
+  limit-resource m4route-mem minimum 58 maximum 58&#xD;
+  limit-resource m6route-mem minimum 8 maximum 8&#xD;
+&#xD;
+&#xD;
+role name guest&#xD;
+  rule 4 permit command show ip int brief&#xD;
+  rule 3 permit command show int brief&#xD;
+  rule 2 permit command show run *&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+&#xD;
+role name guest&#xD;
+  rule 2 permit read&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+role name ansible&#xD;
+  rule 10 permit read&#xD;
+  rule 9 permit command configure ; ip route *&#xD;
+  rule 8 permit command configure ; interface * ; ip address *&#xD;
+  rule 7 permit command configure ; interface * ; no switchport&#xD;
+  rule 6 permit command configure ; interface * ; no shut&#xD;
+  rule 5 permit command configure ; interface * ; switchport *&#xD;
+  rule 4 permit command configure ; vlan *&#xD;
+  rule 3 permit command configure ; feature *&#xD;
+  rule 2 permit command show ip route *&#xD;
+  rule 1 permit command show cdp neighbor&#xD;
+username admin password 5 $5$RntehrWP$2BrCWwELPuRooqK2ah0jbxcDyGBffZlj5A32rcuaRQC  role network-admin&#xD;
+username adminbackup password 5 !  role network-operator&#xD;
+username adminbackup passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username guest password 5 $5$cwsbeoEg$JHQ5plMQFVfnMWYY4KVTshLTEwbW8UPajat9IEBeOt2  role guest&#xD;
+username guest passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username ansible password 5 $5$TdyjK1mI$xJioprCKUPOb0Z2WeyvXIzFMHEW6FOMYOVYktq13xc.  role ansible&#xD;
+username ansible passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+no password strength-check&#xD;
+&#xD;
+no password strength-check&#xD;
+ip domain-lookup&#xD;
+copp profile strict&#xD;
+&#xD;
+&#xD;
+vlan 1&#xD;
+&#xD;
+vrf context management&#xD;
+hardware forwarding unicast trace&#xD;
+&#xD;
+interface Ethernet2/1&#xD;
+ no shutdown&#xD;
+&#xD;
+interface Ethernet2/2&#xD;
+no shutdown&#xD;
+&#xD;
+&#xD;
+interface mgmt0&#xD;
+  ip address 198.18.1.100&#xD;
+  no mac-address&#xD;
+  no shutdown&#xD;
+  no cdp enable&#xD;
+  vrf member management&#xD;
+&#xD;
+&#xD;
+line console&#xD;
+line vty&#xD;
+</entry>
+        </extensions>
+        <interface id="0" name="Ethernet2/1" ipv4="10.0.0.5" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet2/2" ipv4="10.0.0.9" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet2/3" ipv4="10.0.0.13" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet2/4" ipv4="10.0.0.17" netPrefixLenV4="30"/>
+        <interface id="4" name="Ethernet2/5" ipv4="10.0.0.21" netPrefixLenV4="30"/>
+        <interface id="5" name="Ethernet2/6" ipv4="10.0.0.25" netPrefixLenV4="30"/>
+    </node>
+    <node name="spine-2" type="SIMPLE" subtype="NX-OSv" location="269,58" vmImage="NX-OSv-7.3 [b2d3b700-f8da-41c3-9107-ee92f4296188]" vmFlavor="NX-OSv" ipv4="192.168.0.2">
+        <extensions>
+            <entry key="static_ip" type="String">198.18.1.101</entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">! NX-OSv Config generated on 2016-01-05 17:11&#xD;
+! by autonetkit_0.15.3&#xD;
+!&#xD;
+version 6.2(1)&#xD;
+license grace-period&#xD;
+!&#xD;
+hostname spine-2&#xD;
+vdc spine-2 id 1&#xD;
+  allocate interface Ethernet2/1-48&#xD;
+  limit-resource vlan minimum 16 maximum 4094&#xD;
+  limit-resource vrf minimum 2 maximum 4096&#xD;
+  limit-resource port-channel minimum 0 maximum 768&#xD;
+  limit-resource u4route-mem minimum 96 maximum 96&#xD;
+  limit-resource u6route-mem minimum 24 maximum 24&#xD;
+  limit-resource m4route-mem minimum 58 maximum 58&#xD;
+  limit-resource m6route-mem minimum 8 maximum 8&#xD;
+&#xD;
+role name guest&#xD;
+  rule 4 permit command show ip int brief&#xD;
+  rule 3 permit command show int brief&#xD;
+  rule 2 permit command show run *&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+&#xD;
+role name guest&#xD;
+  rule 2 permit read&#xD;
+  rule 1 permit command configure ; feature nxapi&#xD;
+role name ansible&#xD;
+  rule 10 permit read&#xD;
+  rule 9 permit command configure ; ip route *&#xD;
+  rule 8 permit command configure ; interface * ; ip address *&#xD;
+  rule 7 permit command configure ; interface * ; no switchport&#xD;
+  rule 6 permit command configure ; interface * ; no shut&#xD;
+  rule 5 permit command configure ; interface * ; switchport *&#xD;
+  rule 4 permit command configure ; vlan *&#xD;
+  rule 3 permit command configure ; feature *&#xD;
+  rule 2 permit command show ip route *&#xD;
+  rule 1 permit command show cdp neighbor&#xD;
+username admin password 5 $5$RntehrWP$2BrCWwELPuRooqK2ah0jbxcDyGBffZlj5A32rcuaRQC  role network-admin&#xD;
+username adminbackup password 5 !  role network-operator&#xD;
+username adminbackup passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username guest password 5 $5$cwsbeoEg$JHQ5plMQFVfnMWYY4KVTshLTEwbW8UPajat9IEBeOt2  role guest&#xD;
+username guest passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+username ansible password 5 $5$TdyjK1mI$xJioprCKUPOb0Z2WeyvXIzFMHEW6FOMYOVYktq13xc.  role ansible&#xD;
+username ansible passphrase  lifetime 99999 warntime 14 gracetime 3&#xD;
+no password strength-check&#xD;
+&#xD;
+ip domain-lookup&#xD;
+copp profile strict&#xD;
+&#xD;
+&#xD;
+vlan 1&#xD;
+&#xD;
+vrf context management&#xD;
+hardware forwarding unicast trace&#xD;
+&#xD;
+interface Ethernet2/1&#xD;
+  no mac-address&#xD;
+  no shutdown&#xD;
+&#xD;
+interface Ethernet2/2&#xD;
+  no mac-address&#xD;
+  no shutdown&#xD;
+&#xD;
+&#xD;
+interface mgmt0&#xD;
+  ip add 198.18.1.101/24&#xD;
+  no mac-address&#xD;
+  no shutdown&#xD;
+  no cdp enable&#xD;
+  vrf member management&#xD;
+&#xD;
+&#xD;
+line console&#xD;
+line vty&#xD;
+</entry>
+        </extensions>
+        <interface id="0" name="Ethernet2/1" ipv4="10.0.0.6" netPrefixLenV4="30"/>
+        <interface id="1" name="Ethernet2/2" ipv4="10.0.0.10" netPrefixLenV4="30"/>
+        <interface id="2" name="Ethernet2/3" ipv4="10.0.0.29" netPrefixLenV4="30"/>
+        <interface id="3" name="Ethernet2/4" ipv4="10.0.0.33" netPrefixLenV4="30"/>
+        <interface id="4" name="Ethernet2/5" ipv4="10.0.0.37" netPrefixLenV4="30"/>
+        <interface id="5" name="Ethernet2/6" ipv4="10.0.0.41" netPrefixLenV4="30"/>
+    </node>
+    <node name="server-1" type="SIMPLE" subtype="IOSv" location="75,269">
+        <extensions>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">!&#xD;
+! Last configuration change at 21:10:36 UTC Fri Jan 8 2016&#xD;
+!&#xD;
+version 15.5&#xD;
+service timestamps debug datetime msec&#xD;
+service timestamps log datetime msec&#xD;
+no service password-encryption&#xD;
+!&#xD;
+hostname server-1&#xD;
+!&#xD;
+boot-start-marker&#xD;
+boot-end-marker&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+no aaa new-model&#xD;
+ethernet lmi ce&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2&#xD;
+mmi polling-interval 60&#xD;
+no mmi auto-configure&#xD;
+no mmi pvc&#xD;
+mmi snmp-timeout 180&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+ip cef&#xD;
+no ipv6 cef&#xD;
+!&#xD;
+multilink bundle-name authenticated&#xD;
+!&#xD;
+!&#xD;
+cts logging verbose&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+redundancy&#xD;
+!&#xD;
+!&#xD;
+! &#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+interface GigabitEthernet0/0&#xD;
+ ip address 192.168.1.1 255.255.255.0&#xD;
+ duplex auto&#xD;
+ speed auto&#xD;
+ media-type rj45&#xD;
+!&#xD;
+interface GigabitEthernet0/1&#xD;
+ ip address 192.168.100.10 255.255.255.0&#xD;
+ duplex auto&#xD;
+ speed auto&#xD;
+ media-type rj45&#xD;
+!&#xD;
+ip forward-protocol nd&#xD;
+!&#xD;
+!&#xD;
+no ip http server&#xD;
+no ip http secure-server&#xD;
+!&#xD;
+!&#xD;
+ip route 0.0.0.0 0.0.0.0 192.168.100.1&#xD;
+!&#xD;
+!&#xD;
+control-plane&#xD;
+!&#xD;
+banner exec `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+banner incoming `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+banner login `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+!&#xD;
+line con 0&#xD;
+line aux 0&#xD;
+line vty 0 4&#xD;
+ login&#xD;
+ transport input none&#xD;
+!&#xD;
+no scheduler allocate&#xD;
+!&#xD;
+end</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <node name="server-2" type="SIMPLE" subtype="IOSv" location="314,273">
+        <extensions>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
+            <entry key="config" type="String">!&#xD;
+! Last configuration change at 21:10:03 UTC Fri Jan 8 2016&#xD;
+!&#xD;
+version 15.5&#xD;
+service timestamps debug datetime msec&#xD;
+service timestamps log datetime msec&#xD;
+no service password-encryption&#xD;
+!&#xD;
+hostname server-2&#xD;
+!&#xD;
+boot-start-marker&#xD;
+boot-end-marker&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+no aaa new-model&#xD;
+ethernet lmi ce&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2&#xD;
+mmi polling-interval 60&#xD;
+no mmi auto-configure&#xD;
+no mmi pvc&#xD;
+mmi snmp-timeout 180&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+ip cef&#xD;
+no ipv6 cef&#xD;
+!&#xD;
+multilink bundle-name authenticated&#xD;
+!&#xD;
+!&#xD;
+cts logging verbose&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+redundancy&#xD;
+!&#xD;
+!&#xD;
+! &#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+!&#xD;
+interface GigabitEthernet0/0&#xD;
+ ip address 192.168.1.2 255.255.255.0&#xD;
+ duplex auto&#xD;
+ speed auto&#xD;
+ media-type rj45&#xD;
+!&#xD;
+interface GigabitEthernet0/1&#xD;
+ ip address 192.168.200.10 255.255.255.0&#xD;
+ duplex auto&#xD;
+ speed auto&#xD;
+ media-type rj45&#xD;
+!&#xD;
+ip forward-protocol nd&#xD;
+!&#xD;
+!&#xD;
+no ip http server&#xD;
+no ip http secure-server&#xD;
+!&#xD;
+!&#xD;
+ip route 0.0.0.0 0.0.0.0 192.168.200.1&#xD;
+!&#xD;
+!&#xD;
+control-plane&#xD;
+!&#xD;
+banner exec `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+banner incoming `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+banner login `&#xD;
+**************************************************************************&#xD;
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *&#xD;
+* education. IOSv is provided as-is and is not supported by Cisco's      *&#xD;
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *&#xD;
+* of the IOSv Software or Documentation to any third party for any       *&#xD;
+* purposes is expressly prohibited except as otherwise authorized by     *&#xD;
+* Cisco in writing.                                                      *&#xD;
+**************************************************************************`&#xD;
+!&#xD;
+line con 0&#xD;
+line aux 0&#xD;
+line vty 0 4&#xD;
+ login&#xD;
+ transport input none&#xD;
+!&#xD;
+no scheduler allocate&#xD;
+!&#xD;
+end</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[3]" src="/virl:topology/virl:node[6]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[3]" src="/virl:topology/virl:node[5]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[2]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[1]"/>
+</topology>
