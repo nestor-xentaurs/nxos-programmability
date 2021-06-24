@@ -1,0 +1,37 @@
+---
+  - hosts: leaf, jinja2_leaf
+    connection: local
+    gather_facts: false
+    vars:
+      ios_provider:
+         username: "{{ user }}"
+         password: "{{ pwd }}"
+         timeout: 30
+         host: "{{ inventory_hostname }}"
+    tasks:
+      - name: verify underlay
+        register: underlay_output
+        ios_command:
+          provider: "{{ ios_provider }}"
+          commands:
+            - show ip ospf neighbors
+            - show ip bgp sum
+            - show ip pim neighbor
+        tags: underlay
+      - debug: var=underlay_output.stdout_lines
+        tags: underlay
+#      - copy: content="{{underlay_output | to_nice_json}}" dest="verify/{{inventory_hostname}}_underlay"
+      - name: Verify Overlay
+        register: overlay_output
+        ios_command:
+          provider: "{{ ios_provider }}"
+          commands:
+            - show nve vni
+            - show nve peer
+            - show ip route vrf Tenant-1
+            - show bgp l2vpn evpn
+            - show l2route evpn mac-ip all
+        tags: overlay
+      - debug: var=overlay_output.stdout_lines
+        tags: overlay
+
