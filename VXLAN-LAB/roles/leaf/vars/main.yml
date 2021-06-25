@@ -20,7 +20,7 @@
   - { interface: loopback0 }
   - { interface: loopback1 }
 
-L2VNI:
+  L2VNI:
   - { vlan_id: 140, vni: 50140, ip_add: 172.21.140.1, mask: 24, vlan_name: L2-VNI-140-Tenant1, mcast: 239.0.0.140 }
   - { vlan_id: 141, vni: 50141, ip_add: 172.21.141.1, mask: 24, vlan_name: L2-VNI-141-Tenant1, mcast: 239.0.0.141 }
   L3VNI:
