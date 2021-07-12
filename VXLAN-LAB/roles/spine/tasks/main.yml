@@ -68,13 +68,13 @@
            provider: "{{ nxos_provider }}"
          with_items: "{{L3_interfaces}}"
          tags: multicast
-       - name: Enable OSPF on New LP1
-         nxos_interface_ospf:
-           interface: loopback1
-           ospf: 1
-           area: 0
-           provider: "{{ nxos_provider }}"
-         tags: multicast
+#       - name: Enable OSPF on New LP1
+#         nxos_interface_ospf:
+#           interface: loopback1
+#           ospf: 1
+#           area: 0
+#           provider: "{{ nxos_provider }}"
+#         tags: multicast
        - name: Configure PIM RP
          nxos_pim_rp_address:
            rp_address: "{{ loopback1 }}"
