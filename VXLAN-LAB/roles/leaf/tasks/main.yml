@@ -98,11 +98,11 @@
            afi: ipv4
            provider: "{{ nxos_provider }}"
          tags: vxlan
-       - name: Configure Anycast GW
-         nxos_overlay_global:
-           anycast_gateway_mac: 0000.2222.3333
-           provider: "{{ nxos_provider }}"
-         tags: vxlan
+#       - name: Configure Anycast GW
+#         nxos_overlay_global:
+#           anycast_gateway_mac: 0000.2222.3333
+#           provider: "{{ nxos_provider }}"
+#         tags: vxlan
 #       - name: Configure L2VNI
 #         nxos_interface:
 #           interface: "vlan{{ item.vlan_id }}"
