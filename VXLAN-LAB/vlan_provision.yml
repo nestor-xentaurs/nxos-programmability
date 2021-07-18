@@ -34,4 +34,4 @@
           interface: eth2/3
           mode: access
           access_vlan: 141
-          provider: "{{nxos_provider}}":
+          provider: "{{nxos_provider}}"
