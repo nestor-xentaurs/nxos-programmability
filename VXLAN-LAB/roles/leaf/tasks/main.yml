@@ -86,14 +86,14 @@
          tags: vxlan
        - name: Configure Tenant VRF
          nxos_vrf:
-           vrf: Tenant-1
+           name: Tenant-1
            rd:  auto
            vni: "{{ L3VNI[0].vni }}"
            provider: "{{ nxos_provider }}"
          tags: vxlan
        - name: Configure VRF AF
          nxos_vrf_af:
-           vrf: Tenant-1
+           name: Tenant-1
            route_target_both_auto_evpn: true
            afi: ipv4
            provider: "{{ nxos_provider }}"
@@ -103,20 +103,20 @@
            anycast_gateway_mac: 0000.2222.3333
            provider: "{{ nxos_provider }}"
          tags: vxlan
-       - name: Configure L2VNI
-         nxos_interface:
-           interface: "vlan{{ item.vlan_id }}"
-           provider: "{{ nxos_provider }}"
-         with_items: "{{ L2VNI }}"
-         tags: vxlan
-       - name: Configure L3VNI
-         nxos_interface:
-           interface: "vlan{{ L3VNI[0].vlan_id }}"
-           provider: "{{ nxos_provider }}"
-         tags: vxlan
+#       - name: Configure L2VNI
+#         nxos_interface:
+#           interface: "vlan{{ item.vlan_id }}"
+#           provider: "{{ nxos_provider }}"
+#         with_items: "{{ L2VNI }}"
+#         tags: vxlan
+#       - name: Configure L3VNI
+#         nxos_interface:
+#           interface: "vlan{{ L3VNI[0].vlan_id }}"
+#           provider: "{{ nxos_provider }}"
+#         tags: vxlan
        - name: Assign interface to Tenant VRF
          nxos_vrf_interface:
-           vrf: Tenant-1
+           name: Tenant-1
            interface: "vlan{{ item.vlan_id }}"
            provider: "{{ nxos_provider }}"
          with_items:
