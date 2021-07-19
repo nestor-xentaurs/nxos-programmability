@@ -93,7 +93,7 @@
 #         tags: vxlan
        - name: Configure VRF AF
          nxos_vrf_af:
-           name: Tenant-1
+           vrf: Tenant-1
            route_target_both_auto_evpn: true
            afi: ipv4
            provider: "{{ nxos_provider }}"
