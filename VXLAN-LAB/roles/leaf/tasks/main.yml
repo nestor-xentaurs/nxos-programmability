@@ -84,13 +84,13 @@
          - "{{ L2VNI }}"
          - "{{ L3VNI }}"
          tags: vxlan
-       - name: Configure Tenant VRF
-         nxos_vrf:
-           name: Tenant-1
-           rd:  auto
-           vni: "{{ L3VNI[0].vni }}"
-           provider: "{{ nxos_provider }}"
-         tags: vxlan
+#       - name: Configure Tenant VRF
+#         nxos_vrf:
+#           name: Tenant-1
+#           rd:  auto
+#           vni: "{{ L3VNI[0].vni }}"
+#           provider: "{{ nxos_provider }}"
+#         tags: vxlan
        - name: Configure VRF AF
          nxos_vrf_af:
            name: Tenant-1
