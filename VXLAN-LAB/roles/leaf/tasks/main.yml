@@ -105,13 +105,13 @@
 #         tags: vxlan
 #       - name: Configure L2VNI
 #         nxos_interface:
-#           interface: "vlan{{ item.vlan_id }}"
+#           interface: "vlan {{ item.vlan_id }}"
 #           provider: "{{ nxos_provider }}"
 #         with_items: "{{ L2VNI }}"
 #         tags: vxlan
 #       - name: Configure L3VNI
 #         nxos_interface:
-#           interface: "vlan{{ L3VNI[0].vlan_id }}"
+#           interface: "vlan {{ L3VNI[0].vlan_id }}"
 #           provider: "{{ nxos_provider }}"
 #         tags: vxlan
 #       - name: Assign interface to Tenant VRF
@@ -140,7 +140,7 @@
 #         tags: vxlan
 #       - name: Configure L3VNI SVI
 #         nxos_interface:
-#           interface: "vlan{{ L3VNI[0].vlan_id }}"
+#           interface: "vlan {{ L3VNI[0].vlan_id }}"
 #           ip_forward: enable
 #           provider: "{{ nxos_provider }}"
 #         tags: vxlan
