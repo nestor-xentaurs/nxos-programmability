@@ -114,11 +114,11 @@
 #           interface: "vlan{{ L3VNI[0].vlan_id }}"
 #           provider: "{{ nxos_provider }}"
 #         tags: vxlan
-       - name: Assign interface to Tenant VRF
-         nxos_vrf_interface:
-           name: Tenant-1
-           interface: "vlan{{ item.vlan_id }}"
-           provider: "{{ nxos_provider }}"
+#       - name: Assign interface to Tenant VRF
+#         nxos_vrf_interface:
+#           name: Tenant-1
+#           interface: "vlan {{ item.vlan_id }}"
+#           provider: "{{ nxos_provider }}"
          with_items:
          - "{{ L2VNI }}"
          - "{{ L3VNI }}"
